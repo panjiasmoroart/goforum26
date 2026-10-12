@@ -4,7 +4,8 @@ services:
     image: mysql:latest
     container_name: local-mysql-fast-campus
     ports:
-      - "3306:3306"
+      # kiri (3307) agar tidak bentrok dengan mysql Windows, kanan (3306) internal Docker
+      - "3307:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=superSecretPassword
       - MYSQL_DATABASE=goforum_db
