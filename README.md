@@ -15,6 +15,10 @@ project-name/
 │   ├── model/
 │   ├── repository/
 │   └── service/
+├── pkg/
+│   ├── internalsql/
+│   ├── jwt/
+│   ├── token/
 ├── scripts/
 │   ├── migrations/
 ├── go.mod
@@ -57,7 +61,11 @@ Folder ini digunakan untuk menyimpan business logic aplikasi, termasuk validasi 
 
 Service layer bertanggung jawab menjalankan aturan bisnis aplikasi agar handler tetap sederhana dan mudah dipelihara.
 
-### 8. `scripts/migrations/`
+### 8. `pkg/`
+
+digunakan untuk meletakan helper-helper yang nantinya kita butuhukan
+
+### 9. `scripts/migrations/`
 
 digunakan untuk menyimpan file-file hasil dari generate Golang Migrate
 

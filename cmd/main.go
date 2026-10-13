@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/panjiasmoroart/goforum26/internal/configs"
 	"github.com/panjiasmoroart/goforum26/internal/handler/memberships"
+	membershipRepo "github.com/panjiasmoroart/goforum26/internal/repository/memberships"
+	"github.com/panjiasmoroart/goforum26/pkg/internalsql"
 )
 
 func main() {
@@ -15,6 +17,8 @@ func main() {
 		cfg *configs.Config
 	)
 
+	// Override folder
+	// Mengganti folder default dari ./configs menjadi ./internal/configs/.
 	err := configs.Init(
 		configs.WithConfigFolder(
 			[]string{"./internal/configs/"},
@@ -27,6 +31,13 @@ func main() {
 	}
 	cfg = configs.Get()
 	log.Println("config : ", cfg)
+
+	db, err := internalsql.Connect(cfg.Database.DataSourceName)
+	if err != nil {
+		log.Fatal("Gagal koneksi ke database", err)
+	}
+
+	_ = membershipRepo.NewRepository(db)
 
 	membershipsHandler := memberships.NewHandler(router)
 	membershipsHandler.RegisterRoute()
