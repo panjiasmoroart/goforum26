@@ -15,6 +15,8 @@ project-name/
 │   ├── model/
 │   ├── repository/
 │   └── service/
+├── scripts/
+│   ├── migrations/
 ├── go.mod
 └── go.sum
 ```
@@ -55,11 +57,15 @@ Folder ini digunakan untuk menyimpan business logic aplikasi, termasuk validasi 
 
 Service layer bertanggung jawab menjalankan aturan bisnis aplikasi agar handler tetap sederhana dan mudah dipelihara.
 
-### 8. `go.mod`
+### 8. `scripts/migrations/`
+
+digunakan untuk menyimpan file-file hasil dari generate Golang Migrate
+
+### . `go.mod`
 
 File `go.mod` berada di root project dan berisi informasi modul Go, termasuk nama module, versi Go yang digunakan, serta dependensi utama yang dibutuhkan oleh project.
 
-### 9. `go.sum`
+### . `go.sum`
 
 File `go.sum` berisi checksum untuk memverifikasi integritas versi modul dan dependensi yang digunakan dalam project Go.
 
