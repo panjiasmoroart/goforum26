@@ -15,6 +15,8 @@ func NewRepository(db *sql.DB) *repository {
 	if err != nil {
 		log.Println("error query", err)
 	}
+	// ketika rowsnya sudah selesai digunakan, jika tidak di defer maka akan terjadi memory leak, karena rows tidak di close
+	defer rows.Close()
 
 	for rows.Next() {
 		var id int
