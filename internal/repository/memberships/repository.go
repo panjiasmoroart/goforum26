@@ -10,7 +10,13 @@ type repository struct {
 }
 
 func NewRepository(db *sql.DB) *repository {
-	// testing query
+	return &repository{
+		db: db,
+	}
+}
+
+func NewRepositoryOld(db *sql.DB) *repository {
+	// testing query and databaseConnection
 	rows, err := db.Query("SELECT id, email FROM users")
 	if err != nil {
 		log.Println("error query", err)

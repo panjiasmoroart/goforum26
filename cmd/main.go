@@ -7,6 +7,7 @@ import (
 	"github.com/panjiasmoroart/goforum26/internal/configs"
 	"github.com/panjiasmoroart/goforum26/internal/handler/memberships"
 	membershipRepo "github.com/panjiasmoroart/goforum26/internal/repository/memberships"
+	membershipSvc "github.com/panjiasmoroart/goforum26/internal/service/memberships"
 	"github.com/panjiasmoroart/goforum26/pkg/internalsql"
 )
 
@@ -37,10 +38,17 @@ func main() {
 		log.Fatal("Gagal koneksi ke database", err)
 	}
 
-	_ = membershipRepo.NewRepository(db)
+	// testing
+	// _ = membershipRepo.NewRepository(db)
+	// membershipsHandler := memberships.NewHandler(router)
+	// membershipsHandler.RegisterRoute()
 
-	membershipsHandler := memberships.NewHandler(router)
-	membershipsHandler.RegisterRoute()
+	membershipRepo := membershipRepo.NewRepository(db)
+
+	membershipService := membershipSvc.NewService(membershipRepo)
+
+	membershipHandler := memberships.NewHandler(router, membershipService)
+	membershipHandler.RegisterRoute()
 
 	router.Run(cfg.Service.Port)
 }
