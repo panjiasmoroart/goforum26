@@ -9,6 +9,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// usecase
+
 func (s *service) SignUp(ctx context.Context, req memberships.SignUpRequest) error {
 	user, err := s.membershipRepo.GetUser(ctx, req.Email, req.Username)
 	if err != nil {
