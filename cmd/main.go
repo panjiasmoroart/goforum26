@@ -6,8 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/panjiasmoroart/goforum26/internal/configs"
 	"github.com/panjiasmoroart/goforum26/internal/handlers/memberships"
+	"github.com/panjiasmoroart/goforum26/internal/handlers/posts"
 	membershipRepo "github.com/panjiasmoroart/goforum26/internal/repository/memberships"
+	postRepo "github.com/panjiasmoroart/goforum26/internal/repository/posts"
 	membershipSvc "github.com/panjiasmoroart/goforum26/internal/service/memberships"
+	postSvc "github.com/panjiasmoroart/goforum26/internal/service/posts"
 	"github.com/panjiasmoroart/goforum26/pkg/internalsql"
 )
 
@@ -44,11 +47,16 @@ func main() {
 	// membershipsHandler.RegisterRoute()
 
 	membershipRepo := membershipRepo.NewRepository(db)
+	postRepo := postRepo.NewRepository(db)
 
 	membershipService := membershipSvc.NewService(cfg, membershipRepo)
+	postService := postSvc.NewService(cfg, postRepo)
 
 	membershipHandler := memberships.NewHandler(router, membershipService)
 	membershipHandler.RegisterRoute()
+
+	postHandler := posts.NewHandler(router, postService)
+	postHandler.RegisterRoute()
 
 	router.Run(cfg.Service.Port)
 }
