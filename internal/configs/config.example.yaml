@@ -1,5 +1,6 @@
 service:
   port: ":9090"
+  secretJWT: "keyJWT"
 
 database:
   dataSourceName: "root:passxxx@tcp(localhost:3306)/database_name?parseTime=true"
