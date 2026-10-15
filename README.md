@@ -49,23 +49,28 @@ Sebagai entry point untuk rest apinya, jadi nanti dari main.go itu akan menuju k
 
 Folder ini digunakan untuk mendefinisikan struktur data aplikasi, seperti Go structs, entity, dan model yang berhubungan dengan representasi data serta database.
 
-### 6. `internal/repository/`
+### 6. `internal/middleware/`
+
+design pattern yang umum digunakan, tujuannya untuk mengitercept & mengubah request ataupun response yang masuk ke dalam API.
+Untuk mengurangi code duplication, Flexibility, kita dapat menggunakan middleware pada endpoin tertentu yg membutuhkan
+
+### 7. `internal/repository/`
 
 Folder ini berisi kode yang bertanggung jawab atas akses dan pengelolaan data dari sumber eksternal, seperti database, Redis, dan penyimpanan lainnya.
 
 Repository menangani operasi data, seperti `Create`, `Find`, `Update`, dan `Delete`, sehingga proses akses data terpisah dari business logic.
 
-### 7. `internal/service/`
+### 8. `internal/service/`
 
 Folder ini digunakan untuk menyimpan business logic aplikasi, termasuk validasi bisnis, pemrosesan data, dan koordinasi antar-repository atau komponen lain yang dibutuhkan.
 
 Service layer bertanggung jawab menjalankan aturan bisnis aplikasi agar handler tetap sederhana dan mudah dipelihara.
 
-### 8. `pkg/`
+### 9. `pkg/`
 
 digunakan untuk meletakan helper-helper yang nantinya kita butuhukan
 
-### 9. `scripts/migrations/`
+### 10. `scripts/migrations/`
 
 digunakan untuk menyimpan file-file hasil dari generate Golang Migrate
 

@@ -38,7 +38,8 @@ func (r *repository) GetUser(ctx context.Context, email, username string) (*memb
 		return nil, err
 	}
 
-	// Skenario -> login and signup (service)
+	// Skenario
+	//  -> login and signup (service)
 	// Login, email tidak ditemukan	email not exist
 	// Login, email ditemukan, password salah	email or password is invalid
 	// Register, email sudah ada	Ditolak
