@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/panjiasmoroart/goforum26/internal/configs"
-	"github.com/panjiasmoroart/goforum26/internal/handler/memberships"
+	"github.com/panjiasmoroart/goforum26/internal/handlers/memberships"
 	membershipRepo "github.com/panjiasmoroart/goforum26/internal/repository/memberships"
 	membershipSvc "github.com/panjiasmoroart/goforum26/internal/service/memberships"
 	"github.com/panjiasmoroart/goforum26/pkg/internalsql"

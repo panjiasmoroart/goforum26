@@ -12,6 +12,7 @@ project-name/
 │   ├── configs/
 │   ├── constants/
 │   ├── handlers/
+│   ├── middleware/
 │   ├── model/
 │   ├── repository/
 │   └── service/
