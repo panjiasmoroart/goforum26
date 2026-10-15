@@ -3,6 +3,7 @@ package memberships
 import (
 	"context"
 	"database/sql"
+	"errors"
 
 	"github.com/panjiasmoroart/goforum26/internal/model/memberships"
 )
@@ -13,13 +14,36 @@ func (r *repository) GetUser(ctx context.Context, email, username string) (*memb
 	row := r.db.QueryRowContext(ctx, query, email, username)
 
 	var response memberships.UserModel
-	err := row.Scan(&response.ID, &response.Email, &response.Password, &response.Username, &response.CreatedAt, &response.UpdatedAt, &response.CreatedBy, &response.UpdatedBy)
+	err := row.Scan(
+		&response.ID,
+		&response.Email,
+		&response.Password,
+		&response.Username,
+		&response.CreatedAt,
+		&response.UpdatedAt,
+		&response.CreatedBy,
+		&response.UpdatedBy,
+	)
+	// if err != nil {
+	// 	if err == sql.ErrNoRows {
+	// 		return nil, nil
+	// 	}
+	// 	return nil, err
+	// }
+
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if errors.Is(err, sql.ErrNoRows) {
 			return nil, nil
 		}
 		return nil, err
 	}
+
+	// Skenario -> login and signup (service)
+	// Login, email tidak ditemukan	email not exist
+	// Login, email ditemukan, password salah	email or password is invalid
+	// Register, email sudah ada	Ditolak
+	// Register, username sudah ada	Ditolak
+	// Register, email dan username belum ada	Boleh lanjut
 
 	return &response, nil
 }
