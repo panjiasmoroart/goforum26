@@ -25,6 +25,8 @@ project-name/
 │   ├── internalsql/
 │   ├── jwt/
 │   ├── token/
+├── public/
+│   ├── images/
 ├── scripts/
 │   ├── migrations/
 ├── go.mod
