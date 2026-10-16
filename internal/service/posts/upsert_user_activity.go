@@ -30,7 +30,7 @@ func (s *service) UpsertUserActivity(ctx context.Context, postID, userID int64, 
 	}
 
 	if userActivity == nil {
-		// create user activity
+		// create user activity, kita lakukan pengecekan juga untuk user yg belum pernah like tapi sudah unliked  "isLiked": false
 		if !request.IsLiked {
 			return errors.New("anda belum pernah like sebelumnya")
 		}
