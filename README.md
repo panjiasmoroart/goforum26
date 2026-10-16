@@ -1,3 +1,8 @@
+# Goforum Database Schema
+
+
+![GoForum ERD](./public/images/ERD-Database-Forum.jpg)
+
 # Go Project Folder Structure
 
 Struktur folder pada project ini dirancang untuk memisahkan tanggung jawab setiap komponen aplikasi agar kode lebih terorganisir, mudah dipelihara (*maintainable*), dan mudah dikembangkan.
