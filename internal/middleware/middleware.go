@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"errors"
 	"net/http"
 	"strings"
 
@@ -17,13 +16,19 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		header = strings.TrimSpace(header)
 		if header == "" {
-			c.AbortWithError(http.StatusUnauthorized, errors.New("missing token"))
+			// c.AbortWithError(http.StatusUnauthorized, errors.New("missing token"))
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+				"message": "missing token",
+			})
 			return
 		}
 
 		userID, username, err := jwt.ValidateToken(header, secretKey)
 		if err != nil {
-			c.AbortWithError(http.StatusUnauthorized, err)
+			// c.AbortWithError(http.StatusUnauthorized, err)
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"message": err.Error(),
+			})
 			return
 		}
 		c.Set("userID", userID)

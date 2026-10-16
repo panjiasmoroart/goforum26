@@ -32,6 +32,10 @@ func ValidateToken(tokenStr, secretKey string) (int64, string, error) {
 		return key, nil
 	})
 	if err != nil {
+		if errors.Is(err, jwt.ErrTokenExpired) {
+			return 0, "", errors.New("token sudah expired")
+		}
+
 		return 0, "", err
 	}
 
