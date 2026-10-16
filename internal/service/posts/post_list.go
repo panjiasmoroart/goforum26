@@ -10,6 +10,12 @@ import (
 func (s *service) GetAllPost(ctx context.Context, pageSize, pageIndex int) (posts.GetAllPostResponse, error) {
 	limit := pageSize
 	offset := pageSize * (pageIndex - 1)
+
+	// fmt.Println("pageSize:", pageSize)
+	// fmt.Println("pageIndex:", pageIndex)
+	// fmt.Println("limit:", limit)
+	// fmt.Println("offset:", offset)
+
 	response, err := s.postRepo.GetAllPost(ctx, limit, offset)
 	if err != nil {
 		log.Error().Err(err).Msg("error get all post from database")

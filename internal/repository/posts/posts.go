@@ -34,7 +34,10 @@ func (r *repository) CreatePost(ctx context.Context, model posts.PostModel) erro
 
 func (r *repository) GetAllPost(ctx context.Context, limit, offset int) (posts.GetAllPostResponse, error) {
 	query := `SELECT p.id, p.user_id, u.username, p.post_title, p.post_content, p.post_hashtags 
-		FROM posts p JOIN users u ON p.user_id = u.id ORDER BY p.updated_at DESC LIMIT ? OFFSET ?`
+	FROM posts p JOIN users u ON p.user_id = u.id ORDER BY p.updated_at DESC LIMIT ? OFFSET ?`
+
+	// fmt.Println("limit:", limit)
+	// fmt.Println("offset:", offset)
 
 	response := posts.GetAllPostResponse{}
 	rows, err := r.db.QueryContext(ctx, query, limit, offset)
@@ -61,18 +64,18 @@ func (r *repository) GetAllPost(ctx context.Context, limit, offset int) (posts.G
 			PostContent:  model.PostContent,
 			PostHashtags: strings.Split(model.PostHashtags, ","),
 		})
-
-		// cek error setelah iterasi selesai
-		if err := rows.Err(); err != nil {
-			return response, err
-		}
-
-		response.Data = data
-		response.Pagination = posts.Pagination{
-			Limit:  limit,
-			Offset: offset,
-		}
+	}
+	// fmt.Println("data --->> 1", data)
+	// error --->> 1 []
+	// cek error setelah iterasi selesai
+	if err := rows.Err(); err != nil {
+		return response, err
 	}
 
+	response.Data = data
+	response.Pagination = posts.Pagination{
+		Limit:  limit,
+		Offset: offset,
+	}
 	return response, nil
 }

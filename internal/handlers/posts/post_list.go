@@ -30,7 +30,7 @@ func (h *Handler) GetAllPost(c *gin.Context) {
 		return
 	}
 
-	response, err := h.postSvc.GetAllPost(ctx, pageIndex, pageSize)
+	response, err := h.postSvc.GetAllPost(ctx, pageSize, pageIndex)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
