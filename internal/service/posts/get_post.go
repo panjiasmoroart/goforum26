@@ -26,6 +26,8 @@ func (s *service) GetPostByID(ctx context.Context, postID int64) (*posts.GetPost
 		return nil, err
 	}
 
+	// fmt.Println("IsLiked -->", postDetail.IsLiked)
+
 	return &posts.GetPostResponse{
 		PostDetail: posts.Post{
 			ID:           postDetail.ID,

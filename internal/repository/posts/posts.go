@@ -103,6 +103,7 @@ func (r *repository) GetPostByID(ctx context.Context, id int64) (*posts.Post, er
 		PostTitle:    model.PostTitle,
 		PostContent:  model.PostContent,
 		PostHashtags: strings.Split(model.PostHashtags, ","),
+		IsLiked:      isLiked,
 	}, nil
 
 }
