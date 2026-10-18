@@ -35,7 +35,23 @@ func ValidateToken(tokenStr, secretKey string) (int64, string, error) {
 		if errors.Is(err, jwt.ErrTokenExpired) {
 			return 0, "", errors.New("token sudah expired")
 		}
+		return 0, "", err
+	}
 
+	if !token.Valid {
+		return 0, "", errors.New("invalid token")
+	}
+	return int64(claims["id"].(float64)), claims["username"].(string), nil
+}
+
+func ValidateTokenWithoutExpiry(tokenStr, secretKey string) (int64, string, error) {
+	key := []byte(secretKey)
+	claims := jwt.MapClaims{}
+
+	token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
+		return key, nil
+	}, jwt.WithoutClaimsValidation())
+	if err != nil {
 		return 0, "", err
 	}
 

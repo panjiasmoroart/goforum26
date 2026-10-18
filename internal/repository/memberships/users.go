@@ -8,9 +8,9 @@ import (
 	"github.com/panjiasmoroart/goforum26/internal/model/memberships"
 )
 
-func (r *repository) GetUser(ctx context.Context, email, username string) (*memberships.UserModel, error) {
+func (r *repository) GetUser(ctx context.Context, email, username string, userID int64) (*memberships.UserModel, error) {
 	query := `SELECT id, email, password, username, created_at, updated_at, created_by, updated_by
-	FROM users WHERE email = ? OR username = ?`
+	FROM users WHERE email = ? OR username = ? OR id = ?`
 	row := r.db.QueryRowContext(ctx, query, email, username)
 
 	var response memberships.UserModel
